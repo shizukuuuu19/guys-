@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cute Surprise Website</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #f9c5d1, #fbc7d4, #fdeff9);
+      overflow: hidden;
+      position: relative; /* Make sure the confetti is in the same stacking context */
+    }
+    .container {
+      text-align: center;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px 20px;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+      z-index: 2; /* Ensure this is above the background but below the confetti */
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background-color: #ff6f91;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #ff4d6d;
+    }
+    h1 {
+      font-size: 24px;
+      color: #ff6f91;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    img {
+      width: 150px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+
+    /* Confetti Styles */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #000; /* Default black color */
+      border-radius: 50%;
+      animation: fall 3s infinite ease-in-out;
+      z-index: 9999; /* Ensure confetti is always above other elements */
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* New Box after Confetti */
+    .new-box {
+      display: none;
+      text-align: center;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px 20px;
+      position: relative;
+      z-index: 10001; /* Make sure it appears above confetti */
+    }
+    .heart-gif {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container" id="mainBox">
+    <img src="https://media.giphy.com/media/j5T3H9Syz5jNYz8Hq5/giphy.gif" alt="Cute Welcome GIF">
+    <h1>CLICK NYO HEHEHEHE!!</h1>
+    <p>SURPRISE!!!</p>
+    <img src="https://media.giphy.com/media/l4pTfx2qLszoacZRS/giphy.gif" alt="Playful GIF">
+    <button id="popupButton">Click Me</button>
+  </div>
+
+  <div class="new-box" id="newBox">
+    <img class="heart-gif" src="https://media.giphy.com/media/ll7pPISs5BTHS/giphy.gif" alt="Heart GIF">
+    <h1>I LOVE YOU GUYS!!!!</h1>
+  </div>
+
+  <script>
+    const popupButton = document.getElementById("popupButton");
+    const mainBox = document.getElementById("mainBox");
+    const newBox = document.getElementById("newBox");
+
+    popupButton.addEventListener("click", () => {
+      // Show the "Hi" and "Trip lang" popups
+      alert("Hi");
+      alert("Trip lang");
+      alert("LOVELOTS!!!!!");
+
+      // Hide the main box and show the new box
+      mainBox.style.display = "none";
+      newBox.style.display = "block";
+
+      // Trigger unlimited confetti
+      setInterval(createConfetti, 100); // Create confetti every 100ms
+    });
+
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      document.body.appendChild(confetti);
+
+      // Randomize position and animation
+      confetti.style.left = Math.random() * 100 + "vw";  // Spread across the width of the screen
+      confetti.style.animationDuration = Math.random() * 3 + 2 + "s"; // Randomize the speed
+      confetti.style.backgroundColor = randomColor(); // Change to random color (black or white)
+
+      // Remove confetti after animation ends
+      setTimeout(() => confetti.remove(), 5000);  // Remove after 5 seconds
+    }
+
+    function randomColor() {
+      // Black and White colors for the confetti
+      const colors = ["#000", "#FFF"]; // Black and White
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+  </script>
+</body>
+</html>
